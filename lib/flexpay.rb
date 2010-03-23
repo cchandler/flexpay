@@ -11,6 +11,7 @@ require 'flexpay/api_module'
 
 require 'flexpay/cobranding_api/v2009_01_09'
 require 'flexpay/fps_api/v2008_09_17'
+require 'flexpay/simple_pay_api/v2009_04_17'
 
 require 'flexpay/util'
 require 'flexpay/exceptions'
@@ -22,28 +23,34 @@ module Flexpay
     API_SANDBOX_ENDPOINT = 'https://fps.sandbox.amazonaws.com/'.freeze
     PIPELINE_URL = 'https://authorize.payments.amazon.com/cobranded-ui/actions/start'.freeze
     PIPELINE_SANDBOX_URL = 'https://authorize.payments-sandbox.amazon.com/cobranded-ui/actions/start'.freeze
-    API_VERSION = Date.new(2008, 9, 17).to_s.freeze
+    SIMPLEPAY_ENDPOINT = 'https://authorize.payments.amazon.com/pba/paypipeline'.freeze
+    SIMPLEPAY_SANDBOX_ENDPOINT = "https://authorize.payments-sandbox.amazon.com/pba/paypipeline".freeze
     SIGNATURE_VERSION = 2.freeze
 
     attr_reader :access_key
     attr_reader :secret_key
     attr_reader :fps_url
     attr_reader :pipeline_url
+    attr_reader :simplepay_url
     attr_reader :cobranding_version
     attr_reader :fps_version
+    attr_reader :simple_pay_version
 
     def initialize(params)
       @access_key = params[:access_key]
       @secret_key = params[:secret_key]
       @cobranding_version = params[:cobranding_version] || "2009-01-09"
       @fps_version = params[:fps_version] || "2008-09-17"
+      @simple_pay_version = params[:simple_pay_version] || "2009-04-17"
       
       if params[:sandbox].nil? or params[:sandbox] == true
         @pipeline_url = PIPELINE_SANDBOX_URL
         @fps_url = API_SANDBOX_ENDPOINT
+        @simplepay_url = SIMPLEPAY_SANDBOX_ENDPOINT
       else
         @pipeline_url = PIPELINE_URL
         @fps_url = API_ENDPOINT
+        @simplepay_url = SIMPLEPAY_ENDPOINT
       end
 
     end
@@ -63,10 +70,10 @@ module Flexpay
       supply_defaults_for_fps_and_return(obj)
     end
     
-    # def version
-    #   raise APINotConfigured if @version.nil? || @version.empty?
-    #   @version
-    # end
+    def get_subscription_button
+      obj = simple_pay_constant_lookup(:SubscriptionButton).new
+      supply_defaults_for_simple_pay_and_return(obj)
+    end
     
     def access_key
       raise APINotConfigured if @access_key.nil? || @access_key.empty?
@@ -88,6 +95,10 @@ module Flexpay
       Flexpay::FpsAPI.const_get("V#{@fps_version.gsub(/-/,'_')}".to_sym).specific_class(sym)
     end
     
+    def simple_pay_constant_lookup(sym)
+      Flexpay::SimplePayAPI.const_get("V#{@simple_pay_version.gsub(/-/,'_')}".to_sym).specific_class(sym)
+    end
+    
     def supply_defaults_for_pipeline_and_return(obj)
       obj.access_key = @access_key
       obj.secret_key = @secret_key
@@ -100,6 +111,13 @@ module Flexpay
       obj.access_key = @access_key
       obj.secret_key = @secret_key
       obj.endpoint = @fps_url
+      obj
+    end
+    
+    def supply_defaults_for_simple_pay_and_return(obj)
+      obj.access_key = @access_key
+      obj.secret_key = @secret_key
+      obj.endpoint = @simplepay_url
       obj
     end
     
