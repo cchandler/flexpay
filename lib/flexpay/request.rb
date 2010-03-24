@@ -60,7 +60,7 @@ module Flexpay
         return result
       end
       
-      doc = Hpricot.XML(response)
+      doc = Hpricot.XML(response.body)
       
       result = {}
       self.class.get_response_parameters.each do |k,v|

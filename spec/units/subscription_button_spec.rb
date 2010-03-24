@@ -12,6 +12,7 @@ describe 'Subscription button' do
     subscription.description = "Unit test"
     subscription.recurringFrequency = "1 month"
     subscription.returnURL = "http://localhost:3000"
+    subscription.immediateReturn = 1
     
     subscription.generate_url.should_not be_empty
   end

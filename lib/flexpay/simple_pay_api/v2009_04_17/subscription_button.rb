@@ -9,7 +9,7 @@ module Flexpay
         include Flexpay::SimplePayAPI::V2009_04_17
         include Flexpay::AmazonFPSRequest
       
-        required_parameters "accessKey", "amount", "description", "recurringFrequency", "returnURL"
+        required_parameters "accessKey", "amount", "description", "recurringFrequency", "returnURL", "immediateReturn"
       
         def initialize
         end
