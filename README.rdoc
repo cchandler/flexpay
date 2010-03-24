@@ -5,6 +5,7 @@ A (hopefully) simple implementation of Amazon's FPS and Simple Pay API for deali
 At this stage this should be considered beta though it's going to production in the next week or so.  If you want more information on how to use stuff take a look at the specs.
 
 Amazon Simple Pay Advanced Guide: http://docs.amazonwebservices.com/AmazonSimplePay/2008-09-17/ASPAdvancedUserGuide/
+
 Amazon FPS Advanced Guide (includes Cobranding): http://docs.amazonwebservices.com/AmazonFPS/2008-09-17/FPSAdvancedGuide/
 
 == Getting an API object

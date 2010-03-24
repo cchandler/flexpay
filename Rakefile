@@ -22,8 +22,8 @@ begin
     gem.has_rdoc           = true
     gem.extra_rdoc_files   = ['README.markdown', 'LICENSE']
 
-    gem.add_dependency('hpricot')
-    gem.add_dependency('rest-client')
+    gem.add_dependency('hpricot', ">=0.8.1")
+    gem.add_dependency('rest-client', ">=1.2.0")
   end
 rescue LoadError
   puts 'Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com'

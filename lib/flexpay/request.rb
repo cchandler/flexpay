@@ -52,7 +52,13 @@ module Flexpay
       url = generate_url(signed)
       
       RestClient.log = "stdout"
-      response = RestClient.get url
+      begin
+        response = RestClient.get url
+      rescue Exception => e
+        result["Exception"] = e
+        result["Response"] = e.response
+        return result
+      end
       
       doc = Hpricot.XML(response)
       
