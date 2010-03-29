@@ -70,6 +70,12 @@ Amazon FPS Advanced Guide (includes Cobranding): http://docs.amazonwebservices.c
   
   redirect_to subscription.generate_url
 
+= For Developers
+
+I tried to make this pretty simple and maintainable, hence the no-frills approach. All the Amazon APIs are internally namespaced using Amazon's classifications and by their published version numbers so newer/older versions of the API can  easily be added side-by-side. You can look at any of the current ones to see how it's done since the same structure is used everywhere.
+
+Updates are happily accepted with tests :-).
+
 == Meta
 
 Written by Chris Chandler(http://chrischandler.name) of Flatterline(http://flatterline.com)
@@ -77,3 +83,5 @@ Written by Chris Chandler(http://chrischandler.name) of Flatterline(http://flatt
 Released under the MIT License: http://www.opensource.org/licenses/mit-license.php
 
 Main page: http://github.com/cchandler/flexpay
+
+Issue tracking: https://flatterline.lighthouseapp.com/projects/49220-flexpay/overview

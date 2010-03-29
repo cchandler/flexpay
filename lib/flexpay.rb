@@ -75,6 +75,11 @@ module Flexpay
       supply_defaults_for_simple_pay_and_return(obj)
     end
     
+    def get_cancel_subscription_and_refund
+      obj = fps_constant_lookup(:CancelSubscriptionAndRefund).new
+      supply_defaults_for_fps_and_return(obj)
+    end
+    
     def access_key
       raise APINotConfigured if @access_key.nil? || @access_key.empty?
       @access_key
