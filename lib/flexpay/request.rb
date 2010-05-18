@@ -52,6 +52,8 @@ module Flexpay
       url = generate_url(signed)
       
       RestClient.log = "stdout"
+      result = {}
+
       begin
         response = RestClient.get url
       rescue Exception => e
@@ -62,7 +64,6 @@ module Flexpay
       
       doc = Hpricot.XML(response.body)
       
-      result = {}
       self.class.get_response_parameters.each do |k,v|
         result[k] = eval("(doc#{v}).innerHTML")
       end
