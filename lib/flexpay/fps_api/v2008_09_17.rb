@@ -8,3 +8,4 @@ end
 
 require 'flexpay/fps_api/v2008_09_17/verify_signature'
 require 'flexpay/fps_api/v2008_09_17/pay'
+require 'flexpay/fps_api/v2008_09_17/cancel_subscription_and_refund'

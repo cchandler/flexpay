@@ -60,6 +60,11 @@ module Flexpay
       supply_defaults_for_pipeline_and_return(obj)
     end
     
+    def get_recipient_token
+      obj = cobranding_constant_lookup(:RecipientToken).new
+      supply_defaults_for_pipeline_and_return(obj)
+    end
+    
     def get_verify_signature
       obj = fps_constant_lookup(:VerifySignature).new
       supply_defaults_for_fps_and_return(obj)

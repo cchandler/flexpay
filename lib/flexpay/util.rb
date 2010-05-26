@@ -19,7 +19,7 @@ module Flexpay
     
     ## These are the modified encoding rules proposed by Amazon. Not quite URL encoding
     def self.modified_URL_encoding(string)
-      URI.escape(string).gsub(/\+/, '%20').gsub(/\*/, '%2A').gsub("%7E","~").gsub(/:/,'%3A').gsub(/\//,'%2F')
+      URI.escape(string).gsub(/\+/, '%20').gsub(/\*/, '%2A').gsub("%7E","~").gsub(/:/,'%3A').gsub(/\//,'%2F').gsub(/,/, '%2C')
     end
     
   end

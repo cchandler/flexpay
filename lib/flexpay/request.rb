@@ -51,7 +51,7 @@ module Flexpay
     def go!(signed=true)
       url = generate_url(signed)
       
-      RestClient.log = "stdout"
+      RestClient.log = Logger.new(STDOUT)
       begin
         response = RestClient.get url
       rescue Exception => e
@@ -60,7 +60,11 @@ module Flexpay
         return result
       end
       
-      doc = Hpricot.XML(response.body)
+      if response.respond_to?(:body)
+        doc = Hpricot.XML(response.body)
+      else
+        doc = Hpricot.XML(response)
+      end
       
       result = {}
       self.class.get_response_parameters.each do |k,v|
@@ -97,7 +101,7 @@ module Flexpay
       params = {}
       self.class.get_required_parameters.each do |p|
         val = self.send(p)
-        params[p.gsub('_','.')] = val unless val.nil? || val.empty?
+        params[p.gsub('_','.')] = val unless val.nil? || ( val.respond_to?(:empty) ? val.empty? : false )
       end
       params
     end

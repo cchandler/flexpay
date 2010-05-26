@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Chandler"]
-  s.date = %q{2010-03-24}
+  s.date = %q{2010-05-26}
   s.email = %q{chris@flatterline.com}
   s.files = [
     "lib/flexpay.rb",
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
      "lib/flexpay/cobranding_api/v2009_01_09/pipelines.rb",
      "lib/flexpay/exceptions.rb",
      "lib/flexpay/fps_api/v2008_09_17.rb",
+     "lib/flexpay/fps_api/v2008_09_17/cancel_subscription_and_refund.rb",
      "lib/flexpay/fps_api/v2008_09_17/pay.rb",
      "lib/flexpay/fps_api/v2008_09_17/verify_signature.rb",
      "lib/flexpay/request.rb",
@@ -32,7 +33,9 @@ Gem::Specification.new do |s|
   s.summary = %q{An API for using the Amazon Flexible Payment Service (FPS).}
   s.test_files = [
     "spec/units/api_spec.rb",
+     "spec/units/cancel_subscription_and_refund_spec.rb",
      "spec/units/pay_spec.rb",
+     "spec/units/recipient_token_spec.rb",
      "spec/units/recurring_pipeline_spec.rb",
      "spec/units/signature_spec.rb",
      "spec/units/subscription_button_spec.rb",
