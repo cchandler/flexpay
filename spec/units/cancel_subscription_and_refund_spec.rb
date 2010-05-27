@@ -23,12 +23,11 @@ HEREDOC
     
     RestClient.stub!(:get).and_return(body)
     
-    # pay.CallerReference = Time.now.to_i.to_s
-    # pay.SenderTokenId = "U65I5X19A9HS8DD8MEIH7ASGRQMVTCPNCPKG4ML8Z8NDGGCLU265KXSILUF8SXIA"
-    # pay.TransactionAmount_Value = "10"
-    # pay.TransactionAmount_CurrencyCode = "USD"
-    # pay.AWSAccessKeyId = ACCESS_KEY
-    # pay.Timestamp = Time.now.utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    pay.CallerReference = Time.now.to_i.to_s
+    pay.CancelReason = "UserRequestOnSite"
+    pay.SubscriptionId = "123"
+    pay.Timestamp = Time.now.utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    pay.AWSAccessKeyId = ACCESS_KEY
     
     result = pay.go!
     result.should have_key(:RefundTransactionId)

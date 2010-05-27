@@ -55,6 +55,7 @@ module Flexpay
       result = {}
 
       begin
+        RestClient.log.info url
         response = RestClient.get url
       rescue Exception => e
         result["Exception"] = e
