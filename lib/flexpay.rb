@@ -98,6 +98,7 @@ module Flexpay
     private
     
     def cobranding_constant_lookup(sym)
+      con = Flexpay::CobrandingAPI.const_get("V#{@cobranding_version.gsub(/-/,'_')}".to_sym)
       Flexpay::CobrandingAPI.const_get("V#{@cobranding_version.gsub(/-/,'_')}".to_sym).specific_class(sym)
     end
     

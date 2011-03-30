@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake/clean'
-require 'spec/rake/spectask'
+#require 'spec/rake/spectask'
+require 'rspec'
+require 'rspec/core/rake_task'
 
 desc 'Default: run specs.'
 task :default => :spec
@@ -35,19 +37,19 @@ end
 
 namespace :spec do
   desc "Run unit specs."
-  Spec::Rake::SpecTask.new(:units) do |t|
-    t.spec_opts   = ['--colour --format progress --loadby mtime --reverse']
-    t.spec_files  = FileList['spec/units/**/*_spec.rb']
+  RSpec::Core::RakeTask.new(:units) do |t|
+    t.rspec_opts = ['--colour --format progress']
+    #t.spec_files  = FileList['spec/units/**/*_spec.rb']
   end
 
   desc "Run integration specs. Requires AWS_ACCESS_KEY and AWS_SECRET_KEY."
-  Spec::Rake::SpecTask.new(:integrations) do |t|
-    t.spec_opts   = ['--colour --format progress --loadby mtime --reverse']
-    t.spec_files  = FileList['spec/integrations/**/*_spec.rb']
+  RSpec::Core::RakeTask.new(:integrations) do |t|
+    t.rspec_opts   = ['--colour --format progress']
+    #t.spec_files  = FileList['spec/integrations/**/*_spec.rb']
   end
 end
 
-Spec::Rake::SpecTask.new(:doc) do |t|
-  t.spec_opts   = ['--format specdoc --dry-run --colour']
-  t.spec_files  = FileList['spec/**/*_spec.rb']
+RSpec::Core::RakeTask.new(:doc) do |t|
+  t.rspec_opts   = ['--format specdoc --dry-run --colour']
+  #t.spec_files  = FileList['spec/**/*_spec.rb']
 end
